@@ -1,11 +1,12 @@
 import { IUser } from '../../models/IUser';
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 // в JS интерфейса нет
 interface UserState {
     users: IUser[];
     isLoading: boolean;
     error: string;
+    count: number;
 }
 
 // инициализируем состяние
@@ -15,6 +16,7 @@ const initialState: UserState = {
     users: [],
     isLoading: false,
     error: '',
+    count: 0,
 };
 
 export const userSlice = createSlice({
@@ -24,6 +26,11 @@ export const userSlice = createSlice({
     reducers: {
         // редьюссеры
         // здесю определяме как будет имзенятся состояние компонента
+        increment(state, action: PayloadAction<number>) {
+            state.count += action.payload;
+            // к значению count приплюсовываем то,
+            // что пришло в action в поле payload
+        },
     },
 });
 

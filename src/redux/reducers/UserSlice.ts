@@ -31,6 +31,12 @@ export const userSlice = createSlice({
             // к значению count приплюсовываем то,
             // что пришло в action в поле payload
         },
+        decriment(state, action: PayloadAction<number>) {
+            state.count = state.count - action.payload;
+        },
+        reset(state) {
+            state.count = 0;
+        },
     },
 });
 

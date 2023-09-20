@@ -6,7 +6,6 @@ interface UserState {
     users: IUser[];
     isLoading: boolean;
     error: string;
-    count: number;
 }
 
 // инициализируем состяние
@@ -16,7 +15,6 @@ const initialState: UserState = {
     users: [],
     isLoading: false,
     error: '',
-    count: 0,
 };
 
 export const userSlice = createSlice({
@@ -26,16 +24,19 @@ export const userSlice = createSlice({
     reducers: {
         // редьюссеры
         // здесю определяме как будет имзенятся состояние компонента
-        increment(state, action: PayloadAction<number>) {
-            state.count += action.payload;
-            // к значению count приплюсовываем то,
-            // что пришло в action в поле payload
+        usersFetching(state) {
+            state.isLoading = true;
         },
-        decriment(state, action: PayloadAction<number>) {
-            state.count = state.count - action.payload;
+        usersFetchingSuccess(state, action: PayloadAction<IUser[]>) {
+            state.isLoading = false;
+            state.error = ''; // сообщение об ошибке обнуляем
+            state.users = action.payload; // в стейт сохраняем action.payload, те массив пользователей IUser[]
         },
-        reset(state) {
-            state.count = 0;
+        usersFetchingError(state, action: PayloadAction<string>) {
+            state.isLoading = false;
+            state.error = action.payload;
+            // если произошла ошибка, то сохраняем в состоянии(state.error) сообщение об ошибке
+            // а само сообщение об ошибке будеи получать в action.payload
         },
     },
 });

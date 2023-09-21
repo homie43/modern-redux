@@ -1,5 +1,6 @@
 import { IUser } from '../../models/IUser';
 import { AppDispatch } from '../store';
+
 import axios from 'axios';
 
 export const fetchUsers = () => async (dispatch: AppDispatch) => {

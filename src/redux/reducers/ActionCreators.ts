@@ -3,7 +3,9 @@ import { AppDispatch } from '../store';
 
 import axios from 'axios';
 import { userSlice } from './UserSlice';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
+// 1 реализация
 export const fetchUsers = () => async (dispatch: AppDispatch) => {
     // возвращаем сначала dispatch, и уже из нее будет производить асинхронные дейтсвия
     try {
